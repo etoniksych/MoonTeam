@@ -25,130 +25,91 @@
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
   --radius: 16px;
   --header-h: 76px;
-/* 1. Перестраиваем главный контейнер, чтобы контент шел под сайдбаром */
+/* 1. Перестраиваем контейнер приложения по вертикали */
 .app-container {
   display: flex;
   flex-direction: column !important;
   gap: 20px;
 }
 
-/* 2. Превращаем сайдбар в верхнюю горизонтальную панель */
+/* 2. Делаем контейнер сайдбара невидимым и растягиваем на всю ширину */
 .sidebar {
-  position: static !important; /* Убираем фиксацию слева */
+  position: static !important; /* Отменяем фиксацию слева */
   width: 100% !important; /* На всю ширину */
-  height: auto !important; /* Авто-высота */
-  transform: none !important; /* Отменяем скрытие */
-  display: flex !important; /* Элементы в линию */
-  align-items: center;
-  gap: 15px;
-  background: #11111e !important; /* Базовый темный фон всей верхней плашки */
-  padding: 12px 20px;
-  border-radius: 12px;
-  box-sizing: border-box;
-}
-
-/* 3. Корректируем заголовок и скрываем ненужные элементы */
-.sidebar-header {
+  height: auto !important;
+  transform: none !important;
+  display: block !important;
   padding: 0 !important;
-  border: none !important;
-}
-.sidebar-header h3 {
   margin: 0 !important;
-  white-space: nowrap;
-  font-size: 14px;
-  text-transform: uppercase;
-  color: #8a8a9e;
-  letter-spacing: 0.5px;
-}
-.sidebar-close-btn, .sidebar-overlay {
-  display: none !important; /* Скрываем крестик и слой затемнения */
 }
 
-/* 4. Выстраиваем сам список папок строго слева направо */
-.categories-list {
-  display: flex !important;
-  flex-direction: row !important; /* В строку */
-  justify-content: flex-start !important; /* Выравнивание по левому краю */
-  align-items: center !important;
-  flex-wrap: wrap; /* Перенос на новую строку */
-  width: 100%;
-  background: none !important;
-  border: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  font-size: 0 !important; /* ХАК: Уничтожает скрытые пробелы между элементами в HTML */
-  gap: 0 !important; /* Обнуляем flex-gap, будем двигать маржинами */
+/* Полностью прячем заголовок "Директории" и кнопку-крестик */
+.sidebar-header, 
+.sidebar-header h3, 
+.sidebar-close-btn, 
+.sidebar-overlay {
+  display: none !important; 
 }
 
-/* ТОТАЛЬНЫЙ СТЯГИВАЮЩИЙ СБРОС ДЛЯ ВСЕХ ВНУТРЕННИХ КОНТЕЙНЕРОВ */
-.categories-list * {
-  margin: 0 !important; 
-  padding: 0 !important; /* Уничтожаем скрытые внутренние поля оберток */
-  gap: 0 !important;
-  font-size: 0 !important; /* Продолжаем глушить скрытые текстовые пробелы */
-}
-
-/* Настройка внутренних контейнеров дерева папок */
+/* 3. Выстраиваем абсолютно все контейнеры папок в один общий горизонтальный ряд */
+.categories-list,
 .categories-list div, 
 .categories-list ul, 
 .categories-list li {
   display: inline-flex !important;
   flex-direction: row !important;
+  flex-wrap: wrap !important; /* Разрешаем перенос на новые строки */
+  justify-content: flex-start !important; /* Прижимаем строго к левому краю */
   align-items: center !important;
   width: auto !important;
-  background: transparent !important; 
-  background-image: none !important;
-  border: none !important;
-  box-shadow: none !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  
+  /* Идеальное расстояние между кнопками: 8px между строками, 6px между кнопками в ряду */
+  gap: 8px 6px !important; 
 }
 
-/* 5. СТИЛИ ДЛЯ КНОПОК-ТАБЛЕТОК (ВОЗВРАЩАЕМ ИМ РАЗМЕР И ЗАДАЕМ ОТСТУП) */
+/* 4. ПРЕВРАЩАЕМ ЭЛЕМЕНТЫ В ЗАКРУГЛЕННЫЕ КНОПКИ (БЕЗ ИЗМЕНЕНИЯ ЦВЕТА) */
 .categories-list button,
 .categories-list a,
 .categories-list .category-item,
 .categories-list [role="button"],
-.categories-list > * > span,
-.categories-list > * > div:not(:has(*)) { 
+.categories-list .folder-title,
+.categories-list div[onclick] { 
   display: inline-flex !important;
-  align-items: center;
-  gap: 8px !important; /* Расстояние внутри кнопки (иконка - текст - цифра) */
-  padding: 8px 16px !important; /* Внутренние отступы кнопки возвращаем */
-  background: #1e1e2f !important; /* Цвет обычной кнопки */
-  color: #fff !important;
-  border-radius: 30px !important; /* Ровный круглый край */
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
-  font-size: 14px !important; /* Возвращаем нормальный размер шрифта тексту папки */
-  white-space: nowrap;
-  border: none !important;
-  width: auto !important;
-  box-shadow: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important; /* Расстояние между иконкой и текстом внутри кнопки */
   
-  /* ЖЕСТКО ЗАДАЕМ МАЛЕНЬКИЙ ОТСТУП МЕЖДУ КНОПКАМИ */
-  margin-right: 8px !important; 
+  /* Компактные отступы под размер таблетки */
+  padding: 6px 14px !important; 
+  
+  border-radius: 20px !important; /* Овальная форма кнопок */
+  cursor: pointer !important;
+  font-size: 13px !important;
+  white-space: nowrap !important; /* Запрещаем тексту разрываться */
+  width: max-content !important;
+  transition: transform 0.1s ease !important;
+  margin: 0 !important;
 }
 
-/* Стиль для текста и счетчика внутри кнопки, чтобы вернуть им шрифт */
-.categories-list button *,
-.categories-list a *,
-.categories-list .category-item * {
-  font-size: 14px !important; 
-}
-
-/* Эффект при наведении на овальную кнопку */
-.categories-list button:hover,
-.categories-list a:hover,
-.categories-list .category-item:hover {
-  background: #2a2a3f !important;
-}
-
-/* Эффект нажатия */
+/* Легкий эффект нажатия на кнопку */
 .categories-list button:active,
-.categories-list a:active {
+.categories-list a:active,
+.categories-list .category-item:active {
   transform: scale(0.96);
 }
 
-/* 6. Делаем основной контент на всю ширину */
+/* Сбрасываем шрифты для внутренних подэлементов */
+.categories-list button *,
+.categories-list a *,
+.categories-list .category-item * {
+  font-size: 13px !important;
+}
+
+/* 5. Сетка со скинами встает на всю ширину ровно под кнопками */
 .main-content {
   width: 100% !important;
   margin-left: 0 !important;
