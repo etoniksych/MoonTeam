@@ -32,15 +32,17 @@
   gap: 20px;
 }
 
-/* 2. Делаем контейнер сайдбара невидимым и растягиваем на всю ширину */
+/* 2. НАСТРОЙКА ОКОШКА С КНОПКАМИ (Делаем его больше и просторнее) */
 .sidebar {
   position: static !important; /* Отменяем фиксацию слева */
   width: 100% !important; /* На всю ширину */
   height: auto !important;
   transform: none !important;
   display: block !important;
-  padding: 0 !important;
-  margin: 0 !important;
+  
+  /* Увеличиваем внутренние отступы окошка (20px сверху/снизу, 25px слева/справа), чтобы оно стало больше */
+  padding: 20px 25px !important; 
+  box-sizing: border-box !important;
 }
 
 /* Полностью прячем заголовок "Директории" и кнопку-крестик */
@@ -51,7 +53,7 @@
   display: none !important; 
 }
 
-/* 3. Выстраиваем абсолютно все контейнеры папок в один общий горизонтальный ряд */
+/* 3. Выстраиваем контейнеры папок в горизонтальный ряд с МИНИМАЛЬНЫМ расстоянием */
 .categories-list,
 .categories-list div, 
 .categories-list ul, 
@@ -67,8 +69,8 @@
   padding: 0 !important;
   list-style: none !important;
   
-  /* Идеальное расстояние между кнопками: 8px между строками, 6px между кнопками в ряду */
-  gap: 8px 6px !important; 
+  /* ИСПРАВЛЕНО: Минимальные отступы между кнопками (4px между строками, 4px между самими кнопками) */
+  gap: 4px 4px !important; 
 }
 
 /* 4. ПРЕВРАЩАЕМ ЭЛЕМЕНТЫ В ЗАКРУГЛЕННЫЕ КНОПКИ (БЕЗ ИЗМЕНЕНИЯ ЦВЕТА) */
@@ -81,10 +83,10 @@
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 6px !important; /* Расстояние между иконкой и текстом внутри кнопки */
+  gap: 5px !important; /* Расстояние между иконкой и текстом внутри кнопки */
   
   /* Компактные отступы под размер таблетки */
-  padding: 6px 14px !important; 
+  padding: 6px 12px !important; 
   
   border-radius: 20px !important; /* Овальная форма кнопок */
   cursor: pointer !important;
@@ -114,6 +116,7 @@
   width: 100% !important;
   margin-left: 0 !important;
 }
+
   
 }
 
