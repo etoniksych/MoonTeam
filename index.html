@@ -25,7 +25,7 @@
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
   --radius: 16px;
   --header-h: 76px;
- /* 1. Перестраиваем главный контейнер, чтобы контент шел под сайдбаром */
+/* 1. Перестраиваем главный контейнер, чтобы контент шел под сайдбаром */
 .app-container {
   display: flex;
   flex-direction: column !important;
@@ -41,7 +41,7 @@
   display: flex !important; /* Элементы в линию */
   align-items: center;
   gap: 20px;
-  background: #1e1e2f !important; /* Темный фон панели */
+  background: #11111e !important; /* Базовый темный фон всей верхней плашки */
   padding: 12px 20px;
   border-radius: 12px;
   box-sizing: border-box;
@@ -73,9 +73,11 @@
   gap: 10px; /* Расстояние между кнопками */
   flex-wrap: wrap; /* Перенос на новую строку, когда кнопок много */
   width: 100%;
+  background: none !important; /* Защита: убираем фон самого списка */
+  border: none !important;
 }
 
-/* ИСПРАВЛЕНИЕ: Сбрасываем блочную вложенность дерева папок */
+/* ЖЕСТКИЙ СБРОС СТАРЫХ ФОНОВ И КОНТЕЙНЕРОВ (Убирает баг со скриншота) */
 .categories-list div, 
 .categories-list ul, 
 .categories-list li {
@@ -87,34 +89,41 @@
   padding: 0 !important;
   list-style: none !important;
   gap: 10px;
+  /* Полностью вырезаем старые фоны, тени, градиенты и обводки, которые создавали кашу */
+  background: transparent !important; 
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* 5. СТИЛИ ДЛЯ КНОПОК-ТАБЛЕТОК (применяются только к кликабельным элементам папок) */
-/* Если в коде это ссылки <a> или элементы с текстом папки, селектор ниже сделает их овальными кнопками */
+/* 5. СТИЛИ ДЛЯ КНОПОК-ТАБЛЕТОК (Создаем чистые аккуратные кнопки) */
 .categories-list button,
 .categories-list a,
 .categories-list .category-item,
-.categories-list [role="button"] {
+.categories-list [role="button"],
+.categories-list > * > span,
+.categories-list > * > div:not(:has(*)) { 
   display: inline-flex !important;
   align-items: center;
   gap: 8px;
   padding: 8px 18px !important;
-  background: #252538 !important; /* Цвет обычной кнопки */
+  background: #1e1e2f !important; /* Цвет обычной кнопки */
   color: #fff !important;
-  border-radius: 30px !important; /* Закругленные углы (овал) */
+  border-radius: 30px !important; /* Ровный круглый край */
   cursor: pointer;
   transition: background 0.2s ease, transform 0.1s ease;
   font-size: 14px;
   white-space: nowrap;
   border: none !important;
-  width: auto !important; /* Кнопка не растягивается */
+  width: auto !important;
+  box-shadow: none !important;
 }
 
 /* Эффект при наведении на овальную кнопку */
 .categories-list button:hover,
 .categories-list a:hover,
 .categories-list .category-item:hover {
-  background: #2f2f4a !important;
+  background: #2a2a3f !important;
 }
 
 /* Эффект нажатия */
