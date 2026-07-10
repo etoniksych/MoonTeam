@@ -40,7 +40,7 @@
   transform: none !important; /* Отменяем скрытие */
   display: flex !important; /* Элементы в линию */
   align-items: center;
-  gap: 15px; /* Расстояние между надписью "Директории" и первыми кнопками */
+  gap: 15px;
   background: #11111e !important; /* Базовый темный фон всей верхней плашки */
   padding: 12px 20px;
   border-radius: 12px;
@@ -69,26 +69,32 @@
   display: flex !important;
   flex-direction: row !important; /* В строку */
   justify-content: flex-start !important; /* Выравнивание по левому краю */
-  align-items: center;
-  gap: 6px !important; /* ИСПРАВЛЕНО: Уменьшили расстояние между кнопками папок */
+  align-items: center !important;
+  gap: 8px !important; /* Уменьшили расстояние между основными группами */
   flex-wrap: wrap; /* Перенос на новую строку, когда кнопок много */
   width: 100%;
   background: none !important;
   border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-/* СБРОС СТАРЫХ ФОНОВ И КОНТЕЙНЕРОВ */
+/* ИСПРАВЛЕНИЕ: Тотальный сброс скрытых отступов у всех внутренних элементов-оберток */
+.categories-list * {
+  margin: 0 !important; /* Обнуляем все внешние отступы, которые раздвигали кнопки */
+}
+
+/* Настройка внутренних контейнеров дерева */
 .categories-list div, 
 .categories-list ul, 
 .categories-list li {
   display: inline-flex !important;
   flex-direction: row !important;
-  align-items: center;
+  align-items: center !important;
   width: auto !important;
-  margin: 0 !important;
   padding: 0 !important;
   list-style: none !important;
-  gap: 6px !important; /* ИСПРАВЛЕНО: Уменьшили расстояние для вложенных элементов структуры */
+  gap: 8px !important; /* Задаем строгое маленькое расстояние между кнопками внутри структуры */
   background: transparent !important; 
   background-image: none !important;
   border: none !important;
@@ -104,8 +110,8 @@
 .categories-list > * > div:not(:has(*)) { 
   display: inline-flex !important;
   align-items: center;
-  gap: 8px; /* Расстояние внутри кнопки между иконкой, текстом и цифрой (оставляем аккуратным) */
-  padding: 8px 16px !important; /* Слегка уменьшили внутренние отступы кнопок, чтобы они стали еще компактнее */
+  gap: 8px; /* Расстояние внутри кнопки (иконка - текст - цифра) */
+  padding: 8px 16px !important; /* Внутренние отступы кнопки */
   background: #1e1e2f !important; /* Цвет обычной кнопки */
   color: #fff !important;
   border-radius: 30px !important; /* Ровный круглый край */
