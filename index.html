@@ -485,15 +485,16 @@
   color: inherit; 
   display: flex; 
   align-items: center; 
+  justify-content: center;
   gap: 8px; 
-  padding: 8px 8px 8px 2px; 
+  padding: 8px 0; 
   cursor: pointer; 
-  text-align: left; 
+  text-align: center; 
   font-size: 13px; 
   font-weight: 600; 
   width: calc(100% - 28px); 
   overflow: hidden; 
-} 
+}  
 
 .tree-children { 
   margin-left: 19px; 
@@ -540,7 +541,7 @@
 } 
 
 .cat-name { 
-  flex: 1; 
+  flex: 0 1 auto; 
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis; 
@@ -856,31 +857,6 @@
     .logo { font-size:18px; }
     .search-wrap { width:100%; }
   }
-
-/* FINAL FIX: центрирование содержимого кнопок папок внутри их рамок */
-.categories-list button,
-.categories-list a,
-.categories-list .category-item,
-.categories-list [role="button"],
-.categories-list .folder-title,
-.categories-list div[onclick] {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  box-sizing: border-box !important;
-}
-
-.categories-list button > *,
-.categories-list a > *,
-.categories-list .category-item > *,
-.categories-list [role="button"] > *,
-.categories-list .folder-title > * {
-  margin: 0 !important;
-  padding: 0 !important;
-  line-height: 1 !important;
-}
-
 </style>
 </head>
 <body>
