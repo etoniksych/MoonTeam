@@ -70,21 +70,25 @@
   flex-direction: row !important; /* В строку */
   justify-content: flex-start !important; /* Выравнивание по левому краю */
   align-items: center !important;
-  gap: 8px !important; /* Уменьшили расстояние между основными группами */
-  flex-wrap: wrap; /* Перенос на новую строку, когда кнопок много */
+  flex-wrap: wrap; /* Перенос на новую строку */
   width: 100%;
   background: none !important;
   border: none !important;
   margin: 0 !important;
   padding: 0 !important;
+  font-size: 0 !important; /* ХАК: Уничтожает скрытые пробелы между элементами в HTML */
+  gap: 0 !important; /* Обнуляем flex-gap, будем двигать маржинами */
 }
 
-/* ИСПРАВЛЕНИЕ: Тотальный сброс скрытых отступов у всех внутренних элементов-оберток */
+/* ТОТАЛЬНЫЙ СТЯГИВАЮЩИЙ СБРОС ДЛЯ ВСЕХ ВНУТРЕННИХ КОНТЕЙНЕРОВ */
 .categories-list * {
-  margin: 0 !important; /* Обнуляем все внешние отступы, которые раздвигали кнопки */
+  margin: 0 !important; 
+  padding: 0 !important; /* Уничтожаем скрытые внутренние поля оберток */
+  gap: 0 !important;
+  font-size: 0 !important; /* Продолжаем глушить скрытые текстовые пробелы */
 }
 
-/* Настройка внутренних контейнеров дерева */
+/* Настройка внутренних контейнеров дерева папок */
 .categories-list div, 
 .categories-list ul, 
 .categories-list li {
@@ -92,16 +96,13 @@
   flex-direction: row !important;
   align-items: center !important;
   width: auto !important;
-  padding: 0 !important;
-  list-style: none !important;
-  gap: 8px !important; /* Задаем строгое маленькое расстояние между кнопками внутри структуры */
   background: transparent !important; 
   background-image: none !important;
   border: none !important;
   box-shadow: none !important;
 }
 
-/* 5. СТИЛИ ДЛЯ КНОПОК-ТАБЛЕТОК */
+/* 5. СТИЛИ ДЛЯ КНОПОК-ТАБЛЕТОК (ВОЗВРАЩАЕМ ИМ РАЗМЕР И ЗАДАЕМ ОТСТУП) */
 .categories-list button,
 .categories-list a,
 .categories-list .category-item,
@@ -110,18 +111,28 @@
 .categories-list > * > div:not(:has(*)) { 
   display: inline-flex !important;
   align-items: center;
-  gap: 8px; /* Расстояние внутри кнопки (иконка - текст - цифра) */
-  padding: 8px 16px !important; /* Внутренние отступы кнопки */
+  gap: 8px !important; /* Расстояние внутри кнопки (иконка - текст - цифра) */
+  padding: 8px 16px !important; /* Внутренние отступы кнопки возвращаем */
   background: #1e1e2f !important; /* Цвет обычной кнопки */
   color: #fff !important;
   border-radius: 30px !important; /* Ровный круглый край */
   cursor: pointer;
   transition: background 0.2s ease, transform 0.1s ease;
-  font-size: 14px;
+  font-size: 14px !important; /* Возвращаем нормальный размер шрифта тексту папки */
   white-space: nowrap;
   border: none !important;
   width: auto !important;
   box-shadow: none !important;
+  
+  /* ЖЕСТКО ЗАДАЕМ МАЛЕНЬКИЙ ОТСТУП МЕЖДУ КНОПКАМИ */
+  margin-right: 8px !important; 
+}
+
+/* Стиль для текста и счетчика внутри кнопки, чтобы вернуть им шрифт */
+.categories-list button *,
+.categories-list a *,
+.categories-list .category-item * {
+  font-size: 14px !important; 
 }
 
 /* Эффект при наведении на овальную кнопку */
@@ -142,7 +153,7 @@
   width: 100% !important;
   margin-left: 0 !important;
 }
-
+  
 }
 
   *{box-sizing:border-box;}
