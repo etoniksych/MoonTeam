@@ -40,7 +40,7 @@
   transform: none !important; /* Отменяем скрытие */
   display: flex !important; /* Элементы в линию */
   align-items: center;
-  gap: 20px;
+  gap: 15px; /* Расстояние между надписью "Директории" и первыми кнопками */
   background: #11111e !important; /* Базовый темный фон всей верхней плашки */
   padding: 12px 20px;
   border-radius: 12px;
@@ -70,14 +70,14 @@
   flex-direction: row !important; /* В строку */
   justify-content: flex-start !important; /* Выравнивание по левому краю */
   align-items: center;
-  gap: 10px; /* Расстояние между кнопками */
+  gap: 6px !important; /* ИСПРАВЛЕНО: Уменьшили расстояние между кнопками папок */
   flex-wrap: wrap; /* Перенос на новую строку, когда кнопок много */
   width: 100%;
-  background: none !important; /* Защита: убираем фон самого списка */
+  background: none !important;
   border: none !important;
 }
 
-/* ЖЕСТКИЙ СБРОС СТАРЫХ ФОНОВ И КОНТЕЙНЕРОВ (Убирает баг со скриншота) */
+/* СБРОС СТАРЫХ ФОНОВ И КОНТЕЙНЕРОВ */
 .categories-list div, 
 .categories-list ul, 
 .categories-list li {
@@ -88,15 +88,14 @@
   margin: 0 !important;
   padding: 0 !important;
   list-style: none !important;
-  gap: 10px;
-  /* Полностью вырезаем старые фоны, тени, градиенты и обводки, которые создавали кашу */
+  gap: 6px !important; /* ИСПРАВЛЕНО: Уменьшили расстояние для вложенных элементов структуры */
   background: transparent !important; 
   background-image: none !important;
   border: none !important;
   box-shadow: none !important;
 }
 
-/* 5. СТИЛИ ДЛЯ КНОПОК-ТАБЛЕТОК (Создаем чистые аккуратные кнопки) */
+/* 5. СТИЛИ ДЛЯ КНОПОК-ТАБЛЕТОК */
 .categories-list button,
 .categories-list a,
 .categories-list .category-item,
@@ -105,8 +104,8 @@
 .categories-list > * > div:not(:has(*)) { 
   display: inline-flex !important;
   align-items: center;
-  gap: 8px;
-  padding: 8px 18px !important;
+  gap: 8px; /* Расстояние внутри кнопки между иконкой, текстом и цифрой (оставляем аккуратным) */
+  padding: 8px 16px !important; /* Слегка уменьшили внутренние отступы кнопок, чтобы они стали еще компактнее */
   background: #1e1e2f !important; /* Цвет обычной кнопки */
   color: #fff !important;
   border-radius: 30px !important; /* Ровный круглый край */
