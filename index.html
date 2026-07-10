@@ -25,6 +25,50 @@
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
   --radius: 16px;
   --header-h: 76px;
+  /* 1. Перестраиваем главный контейнер, чтобы контент шел под сайдбаром */
+.app-container {
+  display: flex;
+  flex-direction: column !important;
+  gap: 15px;
+}
+
+/* 2. Превращаем сайдбар в верхнюю горизонтальную панель */
+.sidebar {
+  position: static !important; /* Убираем фиксированное позиционирование слева */
+  width: 100% !important; /* Растягиваем на всю ширину */
+  height: auto !important; /* Высота теперь зависит от содержимого */
+  transform: none !important; /* Отменяем скрытие/выезд сбоку */
+  display: flex !important; /* Выстраиваем элементы внутри в линию */
+  align-items: center;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+/* 3. Отрезаем лишние элементы, которые больше не нужны в горизонтальном виде */
+.sidebar-header h3 {
+  margin: 0 !important; /* Убираем отступы у заголовка "Директории" */
+  white-space: nowrap;
+}
+.sidebar-close-btn, .sidebar-overlay {
+  display: none !important; /* Прячем кнопку закрытия крестиком и заемнение */
+}
+
+/* 4. Выстраиваем сам список папок горизонтально */
+.categories-list {
+  display: flex !important;
+  flex-direction: row !important; /* В строку вместо колонки */
+  align-items: center;
+  gap: 10px; /* Расстояние между папками */
+  flex-wrap: wrap; /* Если папок станет очень много, они перенесутся ниже */
+  width: 100%;
+}
+
+/* 5. Делаем основной контент на всю ширину */
+.main-content {
+  width: 100% !important;
+  margin-left: 0 !important;
+}
+
 }
 
   *{box-sizing:border-box;}
