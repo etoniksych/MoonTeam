@@ -39,7 +39,7 @@
   height: auto !important;
   transform: none !important;
   display: block !important;
-  padding: 15px 20px !important; /* Слегка уменьшили отступы самого окошка */
+  padding: 15px 20px !important; /* Отступы окошка */
   box-sizing: border-box !important;
 }
 
@@ -80,7 +80,7 @@
   gap: 4px 4px !important;
 }
 
-/* 4. СТИЛИ ДЛЯ УМЕНЬШЕННЫХ КНОПОК-ТАБЛЕТОК */
+/* 4. СТИЛИ ДЛЯ УМЕНЬШЕННЫХ КНОПОК С ИДЕАЛЬНЫМ ЦЕНТРИРОВАНИЕМ */
 .categories-list button,
 .categories-list a,
 .categories-list .category-item,
@@ -88,26 +88,31 @@
 .categories-list .folder-title,
 .categories-list div[onclick] { 
   display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important; /* Центрируем контент внутри кнопки */
+  
+  /* ИСПРАВЛЕНО: Жесткое абсолютное центрирование по всем осям */
+  align-items: center !important; 
+  justify-content: center !important; 
+  align-content: center !important;
+  text-align: center !important;
   
   width: max-content !important;
   min-width: 0 !important;
   max-width: none !important;
   text-indent: 0 !important;
   
-  /* ИСПРАВЛЕНО: Уменьшили отступы (4px сверху/снизу, 10px слева/справа), кнопка стала ниже и уже */
+  /* Компактные отступы маленьких кнопок */
   padding: 4px 10px !important; 
   margin: 0 !important;
   
-  /* ИСПРАВЛЕНО: Уменьшили зазор между иконкой и текстом внутри кнопки */
+  /* Зазор между иконкой и текстом внутри кнопки */
   gap: 4px !important; 
   
   border-radius: 20px !important; /* Овальная форма кнопок */
   cursor: pointer !important;
   
-  /* ИСПРАВЛЕНО: Сделали шрифт кнопок компактнее */
+  /* Уменьшенный шрифт кнопок */
   font-size: 12px !important; 
+  line-height: 1 !important; /* ИСПРАВЛЕНО: Защита от сдвигов текста по вертикали */
   
   white-space: nowrap !important;
   transition: transform 0.1s ease !important;
@@ -124,8 +129,11 @@
 .categories-list button *,
 .categories-list a *,
 .categories-list .category-item * {
+  display: inline-block !important;
+  vertical-align: middle !important; /* Дополнительное выравнивание иконок и цифр */
   font-size: 12px !important; /* Уменьшенный шрифт для иконок и цифр */
   margin: 0 !important;
+  line-height: 1 !important;
 }
 
 /* 5. Сетка со скинами встает на всю ширину ровно под кнопками */
@@ -133,6 +141,7 @@
   width: 100% !important;
   margin-left: 0 !important;
 }
+
   
 }
 
