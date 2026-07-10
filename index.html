@@ -41,9 +41,9 @@
   display: flex !important; /* Элементы в линию */
   align-items: center;
   gap: 20px;
-  background: #11111e; /* Темный фон панели */
+  background: #1e1e2f !important; /* Темный фон панели */
   padding: 12px 20px;
-  border-radius: 8px;
+  border-radius: 12px;
   box-sizing: border-box;
 }
 
@@ -64,47 +64,63 @@
   display: none !important; /* Скрываем крестик и слой затемнения */
 }
 
-/* 4. Выстраиваем сам список папок горизонтально */
+/* 4. Выстраиваем сам список папок строго слева направо */
 .categories-list {
   display: flex !important;
   flex-direction: row !important; /* В строку */
+  justify-content: flex-start !important; /* Выравнивание по левому краю */
   align-items: center;
-  gap: 8px; /* Расстояние между кнопками */
-  flex-wrap: wrap; /* Перенос на новую строку, если кнопок много */
+  gap: 10px; /* Расстояние между кнопками */
+  flex-wrap: wrap; /* Перенос на новую строку, когда кнопок много */
   width: 100%;
 }
 
-/* 5. ПРЕВРАЩАЕМ ЭЛЕМЕНТЫ СПИСКА В ЗАКРУГЛЕННЫЕ КНОПКИ */
-.categories-list > * {
+/* ИСПРАВЛЕНИЕ: Сбрасываем блочную вложенность дерева папок */
+.categories-list div, 
+.categories-list ul, 
+.categories-list li {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  gap: 10px;
+}
+
+/* 5. СТИЛИ ДЛЯ КНОПОК-ТАБЛЕТОК (применяются только к кликабельным элементам папок) */
+/* Если в коде это ссылки <a> или элементы с текстом папки, селектор ниже сделает их овальными кнопками */
+.categories-list button,
+.categories-list a,
+.categories-list .category-item,
+.categories-list [role="button"] {
   display: inline-flex !important;
   align-items: center;
-  gap: 6px;
-  padding: 8px 20px !important; /* Боковые отступы чуть больше для овальной формы */
-  background: #1e1e2f !important; /* Фон обычной кнопки */
+  gap: 8px;
+  padding: 8px 18px !important;
+  background: #252538 !important; /* Цвет обычной кнопки */
   color: #fff !important;
-  border-radius: 30px !important; /* Полное закругление углов (кнопки-таблетки) */
+  border-radius: 30px !important; /* Закругленные углы (овал) */
   cursor: pointer;
   transition: background 0.2s ease, transform 0.1s ease;
   font-size: 14px;
   white-space: nowrap;
   border: none !important;
+  width: auto !important; /* Кнопка не растягивается */
 }
 
-/* Эффект при наведении на кнопку */
-.categories-list > *:hover {
-  background: #2a2a3f !important;
+/* Эффект при наведении на овальную кнопку */
+.categories-list button:hover,
+.categories-list a:hover,
+.categories-list .category-item:hover {
+  background: #2f2f4a !important;
 }
 
-/* Легкий эффект нажатия */
-.categories-list > *:active {
+/* Эффект нажатия */
+.categories-list button:active,
+.categories-list a:active {
   transform: scale(0.96);
-}
-
-/* Стиль для активной (выбранной) кнопки-папки */
-.categories-list > .active,
-.categories-list > [data-active="true"] {
-  background: #6c5ce7 !important; /* Фиолетовый цвет активной кнопки */
-  font-weight: bold;
 }
 
 /* 6. Делаем основной контент на всю ширину */
