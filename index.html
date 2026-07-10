@@ -32,16 +32,14 @@
   gap: 20px;
 }
 
-/* 2. НАСТРОЙКА ОКОШКА С КНОПКАМИ (Делаем его больше и просторнее) */
+/* 2. НАСТРОЙКА ОКОШКА С КНОПКАМИ */
 .sidebar {
   position: static !important; /* Отменяем фиксацию слева */
   width: 100% !important; /* На всю ширину */
   height: auto !important;
   transform: none !important;
   display: block !important;
-  
-  /* Увеличиваем внутренние отступы окошка (20px сверху/снизу, 25px слева/справа), чтобы оно стало больше */
-  padding: 20px 25px !important; 
+  padding: 20px 25px !important; /* Увеличиваем внутренние отступы окошка */
   box-sizing: border-box !important;
 }
 
@@ -53,27 +51,36 @@
   display: none !important; 
 }
 
-/* 3. Выстраиваем контейнеры папок в горизонтальный ряд с МИНИМАЛЬНЫМ расстоянием */
-.categories-list,
-.categories-list div, 
-.categories-list ul, 
-.categories-list li {
-  display: inline-flex !important;
+/* 3. Выстраиваем контейнеры папок в горизонтальный ряд с минимальным расстоянием */
+.categories-list {
+  display: flex !important;
   flex-direction: row !important;
   flex-wrap: wrap !important; /* Разрешаем перенос на новые строки */
-  justify-content: flex-start !important; /* Прижимаем строго к левому краю */
+  justify-content: flex-start !important; /* Прижимаем строки строго к левому краю */
   align-items: center !important;
   width: auto !important;
   max-width: 100% !important;
   margin: 0 !important;
   padding: 0 !important;
   list-style: none !important;
-  
-  /* ИСПРАВЛЕНО: Минимальные отступы между кнопками (4px между строками, 4px между самими кнопками) */
-  gap: 4px 4px !important; 
+  gap: 4px 4px !important; /* Минимальные отступы между кнопками */
 }
 
-/* 4. ПРЕВРАЩАЕМ ЭЛЕМЕНТЫ В ЗАКРУГЛЕННЫЕ КНОПКИ (БЕЗ ИЗМЕНЕНИЯ ЦВЕТА) */
+/* СБРОС СКРЫТЫХ СДВИГОВ У ПРОМЕЖУТОЧНЫХ КОНТЕЙНЕРОВ ДЕРЕВА */
+.categories-list div, 
+.categories-list ul, 
+.categories-list li {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important; /* Обнуляем старые сдвиги вложенных папок */
+  list-style: none !important;
+  gap: 4px 4px !important;
+}
+
+/* 4. ПРЕВРАЩАЕМ ЭЛЕМЕНТЫ В ЗАКРУГЛЕННЫЕ КНОПКИ С ИДЕАЛЬНОЙ СИММЕТРИЕЙ И ТЕКСТОМ ПО ЦЕНТРУ */
 .categories-list button,
 .categories-list a,
 .categories-list .category-item,
@@ -82,33 +89,39 @@
 .categories-list div[onclick] { 
   display: inline-flex !important;
   align-items: center !important;
-  justify-content: center !important;
+  justify-content: center !important; /* Центрируем контент внутри кнопки */
+  
+  /* ИСПРАВЛЕНО: Полностью сбрасываем старую фиксированную ширину и асимметричные отступы */
+  width: max-content !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  text-indent: 0 !important; /* Убираем возможные скрытые сдвиги текста */
+  
+  /* Жестко задаем одинаковые, симметричные отступы слева и справа */
+  padding: 6px 14px !important; 
+  margin: 0 !important;
+  
   gap: 5px !important; /* Расстояние между иконкой и текстом внутри кнопки */
-  
-  /* Компактные отступы под размер таблетки */
-  padding: 6px 12px !important; 
-  
   border-radius: 20px !important; /* Овальная форма кнопок */
   cursor: pointer !important;
   font-size: 13px !important;
   white-space: nowrap !important; /* Запрещаем тексту разрываться */
-  width: max-content !important;
   transition: transform 0.1s ease !important;
-  margin: 0 !important;
 }
 
-/* Легкий эффект нажатия на кнопку */
+/* Эффект нажатия на кнопку */
 .categories-list button:active,
 .categories-list a:active,
 .categories-list .category-item:active {
   transform: scale(0.96);
 }
 
-/* Сбрасываем шрифты для внутренних подэлементов */
+/* Сбрасываем шрифты и выравнивание для внутренних элементов (иконок, счетчиков) */
 .categories-list button *,
 .categories-list a *,
 .categories-list .category-item * {
   font-size: 13px !important;
+  margin: 0 !important; /* Убираем лишние отступы у иконок или цифр */
 }
 
 /* 5. Сетка со скинами встает на всю ширину ровно под кнопками */
